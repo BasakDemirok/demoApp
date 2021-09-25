@@ -86,7 +86,7 @@ public class App {
       
     public static boolean findWordGivenRange(ArrayList<String> array, int s , int l, String key) {
       if(s>l || array.size() == 0 || array == null)
-        return false;
+        return true;
       else{
         for(int i=s; i<=l ; i++){
           if(array.get(i).equals(key.trim()))
