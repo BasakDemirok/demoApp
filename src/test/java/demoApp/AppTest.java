@@ -15,25 +15,31 @@ class AppTest {
 
     @Test
     public void testFound() {
-       ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
-       assertTrue(App.search(array, 4));
+       ArrayList<String> array = new ArrayList<>(Arrays.asList("a","b","c","d","c"));
+       assertTrue(App.findWordGivenRange(array, 2,4, "d"));
      }
  
      @Test
      public void testNotFound() {
-       ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
-       assertFalse(App.search(array, 5));
+       ArrayList<String> array = new ArrayList<>(Arrays.asList("a","b","c","d","c"));
+       assertFalse(App.findWordGivenRange(array, 0,2,"d"));
      }
  
      @Test
      public void testEmptyArray() {
-       ArrayList<Integer> array = new ArrayList<>();
-       assertFalse(App.search(array, 1));
+       ArrayList<String> array = new ArrayList<>();
+       assertFalse(App.findWordGivenRange(array, 5,7,"f"));
      }
  
      @Test
      public void testNull() {
-       assertFalse(App.search(null, 1));
+       assertFalse(App.findWordGivenRange(null, 10,3,"g"));
      }
+
+     @Test
+     public void testReverse() {
+       assertFalse(App.findWordGivenRange(null, 5,2,"b"));
+     }
+ 
  
 }

@@ -40,10 +40,10 @@ public class App {
         String input1 = req.queryParams("input1");
         java.util.Scanner sc1 = new java.util.Scanner(input1);
         sc1.useDelimiter("[;\r\n]+");
-        java.util.ArrayList<Integer> inputList = new java.util.ArrayList<>();
+        java.util.ArrayList<String> inputList = new java.util.ArrayList<>();
         while (sc1.hasNext())
         {
-          int value = Integer.parseInt(sc1.next().replaceAll("\\s",""));
+          String value = sc1.next().replaceAll("\\s","");
           inputList.add(value);
         }
         sc1.close();
@@ -53,7 +53,12 @@ public class App {
         String input2 = req.queryParams("input2").replaceAll("\\s","");
         int input2AsInt = Integer.parseInt(input2);
 
-        boolean result = App.search(inputList, input2AsInt);
+        String input3 = req.queryParams("input2").replaceAll("\\s","");
+        int input3AsInt = Integer.parseInt(input2);
+
+        String input4 = req.queryParams("input2").replaceAll("\\s","");
+
+        Boolean result = App.findWordGivenRange(inputList, input2AsInt,input3AsInt, input4);
 
         Map<String, Boolean> map = new HashMap<String, Boolean>();
         map.put("result", result);
@@ -78,27 +83,16 @@ public class App {
       return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
   }
   
-
-    public static boolean search(ArrayList<Integer> array, int e) {
-        System.out.println("inside search");
-        if (array == null) return false;
-  
-        for (int elt : array) {
-          if (elt == e) return true;
-        }
-        return false;
-      }
       
-    public static int repeatedWordsGivenKey(ArrayList<String> array, int s , int l, String key) {
-      int total = 0;
-      if(s>l)
-        return total;
+    public static boolean findWordGivenRange(ArrayList<String> array, int s , int l, String key) {
+      if(s>l || array.size() == 0 || array == null)
+        return false;
       else{
         for(int i=s; i<=l ; i++){
           if(array.get(i).equals(key))
-            total++;
+            return true;
         }
       }
-        return total;
+        return false;
       }
 }
