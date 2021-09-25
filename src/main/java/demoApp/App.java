@@ -89,7 +89,7 @@ public class App {
         return false;
       else{
         for(int i=s; i<=l ; i++){
-          if(array.get(i).equals(key))
+          if(array.get(i).equals(key.trim()))
             return true;
         }
       }
