@@ -36,9 +36,7 @@ public class App {
       post("/compute", (req, res) -> {
         //System.out.println(req.queryParams("input1"));
         //System.out.println(req.queryParams("input2"));
-
-        boolean temp=false; //for inconsistent types
-
+        
         String input1 = req.queryParams("input1");
         java.util.Scanner sc1 = new java.util.Scanner(input1);
         sc1.useDelimiter("[;\r\n]+");
@@ -50,13 +48,14 @@ public class App {
         }
         sc1.close();
         System.out.println(inputList);
-        
-   
+
+        Boolean consistent = true;
+
         String input2 = req.queryParams("input2").replaceAll("\\s","");
         try {
           int input2AsInt = Integer.parseInt(input2);
         } catch (Exception e) {
-          temp=true;
+          consistent = false;
         }
         
 
@@ -64,25 +63,19 @@ public class App {
         try {
           int input3AsInt = Integer.parseInt(input3);
         } catch (Exception e) {
-          temp=true;
+          consistent = false;
         }
         
 
         String input4 = req.queryParams("input4").replaceAll("\\s","");
 
-        Boolean result;
-        if(temp){
-          result=false;
-        }
-        else{
+        Boolean result=false; //just for declaring result
+        if(consistent)
           result = App.findWordGivenRange(inputList, input2AsInt,input3AsInt, input4);
-        }
 
         Map<String, Boolean> map = new HashMap<String, Boolean>();
         map.put("result", result);
         return new ModelAndView(map, "compute.mustache");
-
-        
       }, new MustacheTemplateEngine());
 
 
