@@ -37,6 +37,8 @@ public class App {
         //System.out.println(req.queryParams("input1"));
         //System.out.println(req.queryParams("input2"));
 
+        boolean temp=false; //for inconsistent types
+
         String input1 = req.queryParams("input1");
         java.util.Scanner sc1 = new java.util.Scanner(input1);
         sc1.useDelimiter("[;\r\n]+");
@@ -48,21 +50,39 @@ public class App {
         }
         sc1.close();
         System.out.println(inputList);
-
-
+        
+   
         String input2 = req.queryParams("input2").replaceAll("\\s","");
-        int input2AsInt = Integer.parseInt(input2);
+        try {
+          int input2AsInt = Integer.parseInt(input2);
+        } catch (Exception e) {
+          s=true;
+        }
+        
 
         String input3 = req.queryParams("input3").replaceAll("\\s","");
-        int input3AsInt = Integer.parseInt(input3);
-
+        try {
+          int input3AsInt = Integer.parseInt(input3);
+        } catch (Exception e) {
+          s=true;
+        }
+        
+        
         String input4 = req.queryParams("input4").replaceAll("\\s","");
 
-        Boolean result = App.findWordGivenRange(inputList, input2AsInt,input3AsInt, input4);
+        Boolean result;
+        if(s){
+          result=false;
+        }
+        else{
+          result = App.findWordGivenRange(inputList, input2AsInt,input3AsInt, input4);
+        }
 
         Map<String, Boolean> map = new HashMap<String, Boolean>();
         map.put("result", result);
         return new ModelAndView(map, "compute.mustache");
+
+        
       }, new MustacheTemplateEngine());
 
 
