@@ -33,7 +33,7 @@ class AppTest {
  
      @Test
      public void testNull() {
-       assertFalse(App.findWordGivenRange(null, 10,3,"g"));
+       assertFalse(App.findWordGivenRange(null, 1,3,"g"));
      }
 
      @Test
