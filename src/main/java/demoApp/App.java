@@ -56,7 +56,7 @@ public class App {
         try {
           int input2AsInt = Integer.parseInt(input2);
         } catch (Exception e) {
-          s=true;
+          temp=true;
         }
         
 
@@ -64,14 +64,14 @@ public class App {
         try {
           int input3AsInt = Integer.parseInt(input3);
         } catch (Exception e) {
-          s=true;
+          temp=true;
         }
         
-        
+
         String input4 = req.queryParams("input4").replaceAll("\\s","");
 
         Boolean result;
-        if(s){
+        if(temp){
           result=false;
         }
         else{
