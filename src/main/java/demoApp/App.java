@@ -36,7 +36,7 @@ public class App {
       post("/compute", (req, res) -> {
         //System.out.println(req.queryParams("input1"));
         //System.out.println(req.queryParams("input2"));
-        
+
         String input1 = req.queryParams("input1");
         java.util.Scanner sc1 = new java.util.Scanner(input1);
         sc1.useDelimiter("[;\r\n]+");
@@ -49,29 +49,16 @@ public class App {
         sc1.close();
         System.out.println(inputList);
 
-        Boolean consistent = true;
 
         String input2 = req.queryParams("input2").replaceAll("\\s","");
-        try {
-          int input2AsInt = Integer.parseInt(input2);
-        } catch (Exception e) {
-          consistent = false;
-        }
-        
+        int input2AsInt = Integer.parseInt(input2);
 
         String input3 = req.queryParams("input3").replaceAll("\\s","");
-        try {
-          int input3AsInt = Integer.parseInt(input3);
-        } catch (Exception e) {
-          consistent = false;
-        }
-        
+        int input3AsInt = Integer.parseInt(input3);
 
         String input4 = req.queryParams("input4").replaceAll("\\s","");
 
-        Boolean result=false; //just for declaring result
-        if(consistent)
-          result = App.findWordGivenRange(inputList, input2AsInt,input3AsInt, input4);
+        Boolean result = App.findWordGivenRange(inputList, input2AsInt,input3AsInt, input4);
 
         Map<String, Boolean> map = new HashMap<String, Boolean>();
         map.put("result", result);
