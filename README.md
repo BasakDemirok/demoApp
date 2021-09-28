@@ -1,5 +1,15 @@
-my app
-trying a new branch 
+This is my first app work. 
+demoApp has four inputs in this order:
+1)String ArrayList
+2)Starting index of search (included)
+3)Last index of search (included)
+4)Key String, that will be searched in the given ArrayList between given indexes
+
+This app returns boolean value:
+If given key is in the given list and indexes, it returns True.
+It returns false otherwise.
+
+Note: demoApp also returns False if inputs do not consistent with above order.
 
 [![Build Status](https://app.travis-ci.com/BasakDemirok/demoApp.svg?branch=main)](https://app.travis-ci.com/BasakDemirok/demoApp)
 
