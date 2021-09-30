@@ -13,8 +13,9 @@ import java.util.Map;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-import spark.ModelAndView;
 import spark.template.mustache.MustacheTemplateEngine;
+import spark.ModelAndView;
+
 
 
 public class App {
@@ -33,37 +34,52 @@ public class App {
 
       get("/", (req, res) -> "Hello, World");
 
-      post("/compute", (req, res) -> {
-        //System.out.println(req.queryParams("input1"));
-        //System.out.println(req.queryParams("input2"));
+      post("/compute", 
+        (req, res) -> {
+          //System.out.println(req.queryParams("input1"));
+          //System.out.println(req.queryParams("input2"));
 
-        String input1 = req.queryParams("input1");
-        java.util.Scanner sc1 = new java.util.Scanner(input1);
-        sc1.useDelimiter("[;\r\n]+");
-        java.util.ArrayList<String> inputList = new java.util.ArrayList<>();
-        while (sc1.hasNext())
-        {
-          String value = sc1.next().replaceAll("\\s","");
-          inputList.add(value);
-        }
-        sc1.close();
-        System.out.println(inputList);
+          String input1 = req.queryParams("input1");
+          java.util.Scanner sc1 = new java.util.Scanner(input1);
+          sc1.useDelimiter("[;\r\n]+");
+          java.util.ArrayList<String> inputList = new java.util.ArrayList<>();
+          while (sc1.hasNext())
+          {
+            String value = sc1.next().replaceAll("\\s","");
+            inputList.add(value);
+          }
+          sc1.close();
+          System.out.println(inputList);
 
+          Boolean temp=true; //for detecting inconsistent type of input
 
-        String input2 = req.queryParams("input2").replaceAll("\\s","");
-        int input2AsInt = Integer.parseInt(input2);
+          String input2 = req.queryParams("input2").replaceAll("\\s","");
+          try {
+            int input2AsInt = Integer.parseInt(input2);
+          } catch (Exception e) {
+            temp = false;
+          }
+          
 
-        String input3 = req.queryParams("input3").replaceAll("\\s","");
-        int input3AsInt = Integer.parseInt(input3);
+          String input3 = req.queryParams("input3").replaceAll("\\s","");
+          try {
+            int input3AsInt = Integer.parseInt(input3);
+          } catch (Exception e) {
+            temp = false;
+          }
+          
 
-        String input4 = req.queryParams("input4").replaceAll("\\s","");
+          String input4 = req.queryParams("input4").replaceAll("\\s","");
+          
+          Boolean result = temp ? App.findWordGivenRange(inputList, input2AsInt,input3AsInt, input4) : false ;
+          
+          Map<String, Boolean> map = new HashMap<String, Boolean>();
+          map.put("result", result);
 
-        Boolean result = App.findWordGivenRange(inputList, input2AsInt,input3AsInt, input4);
-
-        Map<String, Boolean> map = new HashMap<String, Boolean>();
-        map.put("result", result);
-        return new ModelAndView(map, "compute.mustache");
-      }, new MustacheTemplateEngine());
+          return new ModelAndView(map, "compute.mustache");
+        }, 
+        new MustacheTemplateEngine()
+      );
 
 
       get("/compute",
@@ -72,27 +88,29 @@ public class App {
             map.put("result", "not computed yet!");
             return new ModelAndView(map, "compute.mustache");
           },
-          new MustacheTemplateEngine());
-   }
+          new MustacheTemplateEngine()
+        );
+    }
 
-  static int getHerokuAssignedPort() {
+    static int getHerokuAssignedPort() {
       ProcessBuilder processBuilder = new ProcessBuilder();
       if (processBuilder.environment().get("PORT") != null) {
-          return Integer.parseInt(processBuilder.environment().get("PORT"));
+        return Integer.parseInt(processBuilder.environment().get("PORT"));
       }
       return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
-  }
+    }
   
       
     public static boolean findWordGivenRange(ArrayList<String> array, int s , int l, String key) {
-      if(s>l || array.size() == 0 || array == null || l >= array.size() || s < 0 || l < 0)
+      if(s>l || array == null || array.size() == 0 ||  l >= array.size() || s < 0 || l < 0)
         return false;
       else{
         for(int i=s; i<=l ; i++){
           if(array.get(i).equals(key.trim()))
             return true;
         }
-      }
       return false;
+      }
     }
+  
 }
