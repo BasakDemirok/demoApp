@@ -38,7 +38,8 @@ class AppTest {
 
      @Test
      public void testReverse() {
-       assertFalse(App.findWordGivenRange(null, 5,2,"b"));
+       ArrayList<String> array = new ArrayList<>(Arrays.asList("a","b","c","d","c"));
+       assertFalse(App.findWordGivenRange(array, 5,2,"b"));
      }
  
  
