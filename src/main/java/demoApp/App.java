@@ -54,16 +54,17 @@ public class App {
           Boolean temp=true; //for detecting inconsistent type of input
 
           String input2 = req.queryParams("input2").replaceAll("\\s","");
+          int input2AsInt = 0; //it is zero for temporary 
           try {
-            int input2AsInt = Integer.parseInt(input2);
+            input2AsInt = Integer.parseInt(input2);
           } catch (Exception e) {
             temp = false;
           }
           
-
           String input3 = req.queryParams("input3").replaceAll("\\s","");
+          int input3AsInt = 0; //it is zero for temporary time
           try {
-            int input3AsInt = Integer.parseInt(input3);
+            input3AsInt = Integer.parseInt(input3);
           } catch (Exception e) {
             temp = false;
           }
