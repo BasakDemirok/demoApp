@@ -9,7 +9,7 @@ This app returns boolean value:
 If given key is in the given list and indexes, it returns True.
 It returns false otherwise.
 
-Note: demoApp also returns False if inputs do not consistent with above order.
+Note: demoApp also returns "false" if inputs do not consistent with above order or inconsistent type.
 
 [![Build Status](https://app.travis-ci.com/BasakDemirok/demoApp.svg?branch=main)](https://app.travis-ci.com/BasakDemirok/demoApp)
 
