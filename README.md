@@ -1,4 +1,5 @@
-This is my first app work. 
+I prepared this project for my software engineering course and this is my first app work. It has very simple and understandable method called findWordGivenRange(ArrayList<String>, int, in, String)
+
 demoApp has four inputs in this order:
 1)String ArrayList
 2)Starting index of search (included)
