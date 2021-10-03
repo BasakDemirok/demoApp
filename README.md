@@ -7,7 +7,7 @@ demoApp has four inputs in this order:
 4)Key String, that will be searched in the given ArrayList between given indexes
 
 This app returns boolean value:
-If given key is in the given list and indexes, it returns True.
+If given key is in the given list and indexes, it returns true.
 It returns false otherwise.
 
 Note: demoApp also returns "false" if inputs do not consistent with above order or inconsistent type.
